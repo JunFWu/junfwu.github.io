@@ -1,43 +1,110 @@
 <html>
 <head>
     <script>
-        function openjifen() {
-            window.open("http://www.wlzhys.com", "_blank");
-            window.open("https://cn.bing.com/search?q=vue2", "_blank");
-            window.open("https://cn.bing.com/search?q=vue3", "_blank");
-            window.open("https://cn.bing.com/search?q=react", "_blank");
-            window.open("https://cn.bing.com/search?q=angular", "_blank");
-            window.open("https://cn.bing.com/search?q=java", "_blank");
-            window.open("https://cn.bing.com/search?q=c#", "_blank");
-            window.open("https://cn.bing.com/search?q=core", "_blank");
-            window.open("https://cn.bing.com/search?q=netCore", "_blank");
-            window.open("https://cn.bing.com/search?q=ACL", "_blank");
-            window.open("https://cn.bing.com/search?q=ACE", "_blank");
-            window.open("https://cn.bing.com/search?q=SACL", "_blank");
-            window.open("https://cn.bing.com/search?q=DACL", "_blank");
-            window.open("https://cn.bing.com/search?q=jd", "_blank");
-            window.open("https://cn.bing.com/search?q=taobao", "_blank");
-            window.open("https://cn.bing.com/search?q=douyin", "_blank");
-            window.open("https://cn.bing.com/search?q=chatgpt", "_blank");
-            window.open("https://cn.bing.com/search?q=dell", "_blank");
-            window.open("https://cn.bing.com/search?q=asus", "_blank");
-            window.open("https://cn.bing.com/search?q=cisco", "_blank");
-            window.open("https://cn.bing.com/search?q=hp", "_blank");
-            window.open("https://cn.bing.com/search?q=hpe", "_blank");
-            window.open("https://cn.bing.com/search?q=NetApp", "_blank");
-            window.open("https://cn.bing.com/search?q=lenovo", "_blank");
-            window.open("https://cn.bing.com/search?q=LG", "_blank");
-            window.open("https://cn.bing.com/search?q=sumsung", "_blank");
-            window.open("https://cn.bing.com/search?q=sony", "_blank");
-            window.open("https://cn.bing.com/search?q=nec", "_blank");
-            window.open("https://cn.bing.com/search?q=Panasonic", "_blank");
-            window.open("https://cn.bing.com/search?q=huawei", "_blank");
-            window.open("https://cn.bing.com/search?q=xiaomi", "_blank");
+        function uuid() {
+
+            console.log(2233);
+            var s = [];
+            var hexDigits = "0123456789abcdef";
+            for (var i = 0; i < 36; i++) {
+                s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            }
+            s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+            s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+            s[8] = s[13] = s[18] = s[23] = "-";
+
+            var uuid = s.join("");
+
+            console.log(uuid);
+            return uuid;
         }
+
+
+        function openjifen() {
+
+            for (let i = 0; i < 30; i++) {
+                console.log(2233);
+                let uuid = this.uuid();
+                setTimeout(() => window.open(`https://cn.bing.com/search?q=${uuid}`, "_blank"), 200)
+            }
+            // window.open("https://cn.bing.com/search?q=vue2", "_blank");
+            // window.open("https://cn.bing.com/search?q=vue3", "_blank");
+            // window.open("https://cn.bing.com/search?q=react", "_blank");
+            // window.open("https://cn.bing.com/search?q=angular", "_blank");
+            // window.open("https://cn.bing.com/search?q=java", "_blank");
+            // window.open("https://cn.bing.com/search?q=c#", "_blank");
+            // window.open("https://cn.bing.com/search?q=core", "_blank");
+            // window.open("https://cn.bing.com/search?q=netCore", "_blank");
+            // window.open("https://cn.bing.com/search?q=ACL", "_blank");
+            // window.open("https://cn.bing.com/search?q=ACE", "_blank");
+            // window.open("https://cn.bing.com/search?q=SACL", "_blank");
+            // window.open("https://cn.bing.com/search?q=DACL", "_blank");
+            // window.open("https://cn.bing.com/search?q=jd", "_blank");
+            // window.open("https://cn.bing.com/search?q=taobao", "_blank");
+            // window.open("https://cn.bing.com/search?q=douyin", "_blank");
+            // window.open("https://cn.bing.com/search?q=chatgpt", "_blank");
+            // window.open("https://cn.bing.com/search?q=dell", "_blank");
+            // window.open("https://cn.bing.com/search?q=asus", "_blank");
+            // window.open("https://cn.bing.com/search?q=cisco", "_blank");
+            // window.open("https://cn.bing.com/search?q=hp", "_blank");
+            // window.open("https://cn.bing.com/search?q=hpe", "_blank");
+            // window.open("https://cn.bing.com/search?q=NetApp", "_blank");
+            // window.open("https://cn.bing.com/search?q=lenovo", "_blank");
+            // window.open("https://cn.bing.com/search?q=LG", "_blank");
+            // window.open("https://cn.bing.com/search?q=sumsung", "_blank");
+            // window.open("https://cn.bing.com/search?q=sony", "_blank");
+            // window.open("https://cn.bing.com/search?q=nec", "_blank");
+            // window.open("https://cn.bing.com/search?q=Panasonic", "_blank");
+            // window.open("https://cn.bing.com/search?q=huawei", "_blank");
+            // window.open("https://cn.bing.com/search?q=xiaomi", "_blank");
+        }
+
+
     </script>
+
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            border: 0;
+        }
+
+        @keyframes float-vertical {
+            0% {
+                box-shadow: 0 0 2vw 0vw lightskyblue;
+            }
+
+            50% {
+                box-shadow: 0 0 30vw 0vw lightskyblue;
+            }
+
+
+            100% {
+                box-shadow: 0 0 2vw 0vw lightskyblue;
+            }
+        }
+
+
+        .jifen-button {
+            width: 40vw;
+            height: 40vw;
+            border-radius: 50%;
+            background: lightskyblue;
+            border: none;
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10vw;
+            animation: float-vertical 1.5s infinite;
+
+        }
+    </style>
 
 </head>
 <body style="text-align:center">
-    <button onclick="openjifen()" style=" width: 300px;height: 300px;font-size: 60px; border-radius: 50%;  background: lightskyblue; color: white;margin-top:100px">积分</button>
+    <button onclick="openjifen()" class="jifen-button">积分</button>
 </body>
 </html>
