@@ -2,8 +2,6 @@
 <head>
     <script>
         function uuid() {
-
-            console.log(2233);
             var s = [];
             var hexDigits = "0123456789abcdef";
             for (var i = 0; i < 36; i++) {
@@ -14,19 +12,86 @@
             s[8] = s[13] = s[18] = s[23] = "-";
 
             var uuid = s.join("");
-
-            console.log(uuid);
             return uuid;
         }
 
 
-        function openjifen() {
-
-            for (let i = 0; i < 30; i++) {
-                console.log(2233);
-                let uuid = this.uuid();
-                setTimeout(() => window.open(`https://cn.bing.com/search?q=${uuid}&ensearch=1&FORM=BESBTB`, "_blank"), 200)
+        function getStopFlag() {
+            let btnEl = document.getElementById("stopFlag");
+            if (btnEl.innerText) {
+                return true;
+            } else {
+                return false;
             }
+        }
+
+        function setStopFlag(flag) {
+            let btnEl = document.getElementById("stopFlag");
+            if (flag) {
+                btnEl.innerText = "stop";
+            } else {
+                btnEl.innerText = "";
+            }
+
+        }
+
+        function loopOpen(loopCount, downSecond) {
+
+            if (this.getStopFlag()) {
+                this.setStopFlag(false);
+
+                let btnEl = document.getElementById("btnJifen");
+                btnEl.innerText = "积分";
+                return;
+            }
+
+
+
+
+            if (loopCount > 30) {
+                let btnEl = document.getElementById("btnJifen");
+                btnEl.innerText = "积分";
+                return;
+            }
+
+            downSecond = downSecond - 1;
+            console.log(downSecond);
+
+            if (downSecond <= 0) {
+                let uuid = this.uuid();
+                window.open(`https://cn.bing.com/search?q=${uuid}&ensearch=1&FORM=BESBTB`, "_blank");
+
+                loopCount = loopCount + 1;
+                downSecond = Math.floor(Math.random() * (90 - 60 + 1)) + 60;
+
+                let btnEl = document.getElementById("btnJifen");
+                btnEl.innerText = downSecond;
+
+                setTimeout(() => this.loopOpen(loopCount, downSecond), 1000);
+            }
+            else {
+
+                let btnEl = document.getElementById("btnJifen");
+                btnEl.innerText = downSecond;
+                setTimeout(() => this.loopOpen(loopCount, downSecond), 1000);
+            }
+
+
+        }
+
+
+
+        function openjifen() {
+            let btnEl = document.getElementById("btnJifen");
+            if (btnEl.innerText == "积分") {
+                this.setStopFlag(false);
+                this.loopOpen(0, 0);
+            } else {
+                this.setStopFlag(true);
+            }
+
+
+
             // window.open("https://cn.bing.com/search?q=vue2", "_blank");
             // window.open("https://cn.bing.com/search?q=vue3", "_blank");
             // window.open("https://cn.bing.com/search?q=react", "_blank");
@@ -105,6 +170,8 @@
 
 </head>
 <body style="text-align:center">
-    <button onclick="openjifen()" class="jifen-button">积分</button>
+    <button id="btnJifen" onclick="openjifen()" class="jifen-button">积分</button>
+
+    <input id="stopFlag" hidden></input>
 </body>
 </html>
