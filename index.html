@@ -59,8 +59,10 @@
 
             if (downSecond <= 0) {
                 let uuid = this.uuid();
-                window.open(`https://cn.bing.com/search?q=${uuid}&ensearch=1&FORM=BESBTB`, "_blank");
+                // window.open(`https://cn.bing.com/search?q=${uuid}&ensearch=1&FORM=BESBTB`, "_blank");
 
+                let iframe = document.getElementById("iframeShow");
+                iframe.src = `https://cn.bing.com/search?q=${uuid}&ensearch=1&FORM=BESBTB`;
                 loopCount = loopCount + 1;
                 downSecond = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
 
@@ -158,7 +160,7 @@
             background: lightskyblue;
             border: none;
             color: white;
-            position: absolute;
+            position: fixed;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
@@ -170,6 +172,14 @@
 
 </head>
 <body style="text-align:center">
+
+    <div style="width:100vw;height:100vh;overflow: hidden;position:relative">
+        <iframe id="iframeShow" style="width: 100%;height:100%"></iframe>
+    </div>
+    <div style="width:100vw;height:100vh;overflow: hidden;position:fixed;left:0;top:0;background-color: #0AA2;">
+
+
+    </div>
     <button id="btnJifen" onclick="openjifen()" class="jifen-button">积分</button>
 
     <input id="stopFlag" hidden></input>
