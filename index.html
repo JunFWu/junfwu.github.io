@@ -1,6 +1,59 @@
 <html>
 <head>
+    <script id="worker">
+        var loopIntervalid = undefined;
+
+        function loopOpen(loopCount, downSecond) {
+            if (loopCount > 30) {
+                postMessage("stop_success");
+                return;
+            }
+
+            downSecond = downSecond - 1;
+            if (downSecond <= 0) {
+
+                postMessage({ action: "open_url", value: downSecond });
+
+                loopCount = loopCount + 1;
+                downSecond = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
+
+
+                postMessage({ action: "change_down", value: downSecond });
+                loopIntervalid = setTimeout(() => this.loopOpen(loopCount, downSecond), 1000);
+            }
+            else {
+
+                postMessage({ action: "change_down", value: downSecond });
+                loopIntervalid = setTimeout(() => this.loopOpen(loopCount, downSecond), 1000);
+            }
+        }
+
+
+        addEventListener('message', function (e) {
+            if (e.data == 'start') {
+                if (!loopIntervalid) {
+                    this.loopOpen(0, 0);
+                }
+
+            } else if (e.data == 'stop') {
+
+                console.log("stop", loopIntervalid);
+
+                if (loopIntervalid) {
+                    clearTimeout(loopIntervalid);
+                    postMessage({ action: "stop_success", value: undefined });
+                }
+            }
+        }, false);
+
+
+    </script>
+
     <script>
+        var worker = undefined;
+        var btnEl = undefined;
+        var btnStopFlag = undefined;
+
         function uuid() {
             var s = [];
             var hexDigits = "0123456789abcdef";
@@ -15,10 +68,8 @@
             return uuid;
         }
 
-
         function getStopFlag() {
-            let btnEl = document.getElementById("stopFlag");
-            if (btnEl.innerText) {
+            if (btnStopFlag.innerText) {
                 return true;
             } else {
                 return false;
@@ -26,104 +77,74 @@
         }
 
         function setStopFlag(flag) {
-            let btnEl = document.getElementById("stopFlag");
             if (flag) {
-                btnEl.innerText = "stop";
+                btnStopFlag.innerText = "stop";
             } else {
-                btnEl.innerText = "";
+                btnStopFlag.innerText = "";
             }
 
         }
 
-        function loopOpen(loopCount, downSecond) {
-
-            if (this.getStopFlag()) {
-                this.setStopFlag(false);
-
-                let btnEl = document.getElementById("btnJifen");
-                btnEl.innerText = "积分";
-                return;
-            }
 
 
 
+        function init() {
+            var blob = new Blob([document.querySelector('#worker').textContent]);
+            var url = window.URL.createObjectURL(blob);
+            worker = new Worker(url);
 
-            if (loopCount > 30) {
-                let btnEl = document.getElementById("btnJifen");
-                btnEl.innerText = "积分";
-                return;
-            }
+            worker.onmessage = function (e) {
+                if (!e.data) {
+                    return;
+                }
+                console.log(e.data);
 
-            downSecond = downSecond - 1;
-            console.log(downSecond);
-
-            if (downSecond <= 0) {
-                let uuid = this.uuid();
-                // window.open(`https://cn.bing.com/search?q=${uuid}&ensearch=1&FORM=BESBTB`, "_blank");
-
-                let iframe = document.getElementById("iframeShow");
-                iframe.src = `https://cn.bing.com/search?q=${uuid}&ensearch=1&FORM=BESBTB`;
-                loopCount = loopCount + 1;
-                downSecond = Math.floor(Math.random() * (20 - 5 + 1)) + 5;
-
-                let btnEl = document.getElementById("btnJifen");
-                btnEl.innerText = downSecond;
-
-                setTimeout(() => this.loopOpen(loopCount, downSecond), 1000);
-            }
-            else {
-
-                let btnEl = document.getElementById("btnJifen");
-                btnEl.innerText = downSecond;
-                setTimeout(() => this.loopOpen(loopCount, downSecond), 1000);
-            }
+                if (e.data.action == "open_url") {
+                    let iframe = document.getElementById("iframeShow");
+                    iframe.src = `https://cn.bing.com/search?q=${uuid()}&ensearch=1&FORM=BESBTB`;
+                }
+                else if (e.data.action == "change_down") {
 
 
+
+
+                    btnEl.innerText = e.data.value;
+                }
+                else if (e.data.action == "stop_success") {
+                    btnEl.innerText = "积分";
+
+                    worker.terminate();
+                    worker = undefined;
+                }
+            };
         }
-
 
 
         function openjifen() {
-            let btnEl = document.getElementById("btnJifen");
+            if (!btnEl) {
+                btnEl = document.getElementById("btnJifen");
+            }
+
+            if (!btnStopFlag) {
+                btnStopFlag = document.getElementById("stopFlag");
+            }
+
+            console.log("worker", worker);
+            if (!worker) {
+                this.init();
+            }
+
             if (btnEl.innerText == "积分") {
                 this.setStopFlag(false);
                 this.loopOpen(0, 0);
+
+                // 开启循环
+                worker.postMessage("start");
             } else {
                 this.setStopFlag(true);
+                worker.postMessage("stop");
+                // 停止计算
             }
-
-
-
-            // window.open("https://cn.bing.com/search?q=vue2", "_blank");
-            // window.open("https://cn.bing.com/search?q=vue3", "_blank");
-            // window.open("https://cn.bing.com/search?q=react", "_blank");
-            // window.open("https://cn.bing.com/search?q=angular", "_blank");
-            // window.open("https://cn.bing.com/search?q=java", "_blank");
-            // window.open("https://cn.bing.com/search?q=c#", "_blank");
-            // window.open("https://cn.bing.com/search?q=core", "_blank");
-            // window.open("https://cn.bing.com/search?q=netCore", "_blank");
-            // window.open("https://cn.bing.com/search?q=ACL", "_blank");
-            // window.open("https://cn.bing.com/search?q=ACE", "_blank");
-            // window.open("https://cn.bing.com/search?q=SACL", "_blank");
-            // window.open("https://cn.bing.com/search?q=DACL", "_blank");
-            // window.open("https://cn.bing.com/search?q=jd", "_blank");
-            // window.open("https://cn.bing.com/search?q=taobao", "_blank");
-            // window.open("https://cn.bing.com/search?q=douyin", "_blank");
-            // window.open("https://cn.bing.com/search?q=chatgpt", "_blank");
-            // window.open("https://cn.bing.com/search?q=dell", "_blank");
-            // window.open("https://cn.bing.com/search?q=asus", "_blank");
-            // window.open("https://cn.bing.com/search?q=cisco", "_blank");
-            // window.open("https://cn.bing.com/search?q=hp", "_blank");
-            // window.open("https://cn.bing.com/search?q=hpe", "_blank");
-            // window.open("https://cn.bing.com/search?q=NetApp", "_blank");
-            // window.open("https://cn.bing.com/search?q=lenovo", "_blank");
-            // window.open("https://cn.bing.com/search?q=LG", "_blank");
-            // window.open("https://cn.bing.com/search?q=sumsung", "_blank");
-            // window.open("https://cn.bing.com/search?q=sony", "_blank");
-            // window.open("https://cn.bing.com/search?q=nec", "_blank");
-            // window.open("https://cn.bing.com/search?q=Panasonic", "_blank");
-            // window.open("https://cn.bing.com/search?q=huawei", "_blank");
-            // window.open("https://cn.bing.com/search?q=xiaomi", "_blank");
         }
 
 
