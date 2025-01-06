@@ -1662,6 +1662,7 @@
 时间的朋友跨年演讲
 夏东海到底是不是真的喜欢刘星或者说真的把刘星当儿子`;
 
+        var weiboSource = [];
 
         var worker = undefined;
         var btnEl = undefined;
@@ -1692,19 +1693,21 @@
 
         function getSearchInfo() {
 
-            if (!sourceArray) {
-                sourceArray = this.source.split(/\r?\n/)
+            if (this.weiboSource && this.weiboSource.length > 0) {
+                let indexA = Math.floor(Math.random() * (this.weiboSource.length)) + 1;
+
+                return this.weiboSource[indexA - 1];
             }
 
 
-            console.log(sourceArray);
+            if (!sourceArray) {
+                sourceArray = this.source.split(/\r?\n/)
+            }
 
             let searchContent = "";
             let length = sourceArray.length;
             // 随机获取
             let index = Math.floor(Math.random() * (length)) + 1;
-
-            console.log('index', index, length);
 
             searchContent = searchContent + sourceArray[index - 1];
             if (searchContent.length > 5) {
@@ -1735,7 +1738,6 @@
             } else {
                 btnStopFlag.innerText = "";
             }
-
         }
 
 
@@ -1795,7 +1797,12 @@
             }
         }
 
+        function getWeiboredian() {
+            fetch("http://139.196.30.174:33045/weiboapi/getredian").then((response) => response.json())
+                .then((data) => this.weiboSource = data);
+        }
 
+        window.onload = getWeiboredian;
     </script>
 
     <style>
