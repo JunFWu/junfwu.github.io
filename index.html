@@ -1850,8 +1850,8 @@ AI 重塑行业格局
         }
 
         function getWeiboredian() {
-            fetch("http://139.196.30.174:33045/weiboapi/getredian").then((response) => response.json())
-                .then((data) => this.weiboSource = data);
+            fetch("https://v2.xxapi.cn/api/weibohot").then((response) => response.json())
+                .then((data) => this.weiboSource = data.data.map(item => item.title));
         }
 
         window.onload = getWeiboredian;
