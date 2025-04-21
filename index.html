@@ -1851,13 +1851,11 @@ AI 重塑行业格局
 
         function getWeiboredian() {
             const requestOptions = {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({ title: 'Fetch POST Request Example' })
-};
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            };
 
-            fetch("https://tophub.today/do?c=hot&t=daily",requestOptions}
-            ).then((response) => response.json())
+            fetch("https://tophub.today/do?c=hot&t=daily",requestOptions).then((response) => response.json())
                 .then((data) => this.weiboSource = data.data.map(item => item.title));
         }
 
