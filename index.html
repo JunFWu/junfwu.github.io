@@ -1854,8 +1854,8 @@ AI 重塑行业格局
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             };
-
-            fetch("https://tophub.today/do?c=hot&t=daily",requestOptions).then((response) => response.json())
+            fetch("https://v2.xxapi.cn/api/weibohot").then((response) => response.json())
+            // fetch("https://tophub.today/do?c=hot&t=daily",requestOptions).then((response) => response.json()) 
                 .then((data) => this.weiboSource = data.data.map(item => item.title));
         }
 
