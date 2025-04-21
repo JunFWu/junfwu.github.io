@@ -1850,9 +1850,13 @@ AI 重塑行业格局
         }
 
         function getWeiboredian() {
-            fetch("https://tophub.today/do?c=hot&t=daily"，{
+            const requestOptions = {
 method: 'POST',
-headers: { 'Content-Type': 'application/json' }}
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ title: 'Fetch POST Request Example' })
+};
+
+            fetch("https://tophub.today/do?c=hot&t=daily",requestOptions}
             ).then((response) => response.json())
                 .then((data) => this.weiboSource = data.data.map(item => item.title));
         }
