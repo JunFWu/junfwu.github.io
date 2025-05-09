@@ -1823,7 +1823,7 @@ AI 重塑行业格局
 
 
         function openjifen() {
-console.log("this.weiboSource",this.weiboSource);
+            console.log("this.weiboSource", this.weiboSource);
             if (!btnEl) {
                 btnEl = document.getElementById("btnJifen");
             }
@@ -1850,60 +1850,97 @@ console.log("this.weiboSource",this.weiboSource);
             }
         }
 
-        function getWeiboredian() {
+        function getWeiboredian2() {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             };
-this.weiboSource = [];
-            	fetch("https://orz.ai/api/v1/dailynews/?platform=baidu")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
-		fetch("https://orz.ai/api/v1/dailynews/?platform=shaoshupai")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
- 		fetch("https://orz.ai/api/v1/dailynews/?platform=weibo")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
- 		fetch("https://orz.ai/api/v1/dailynews/?platform=zhihu")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
- 		fetch("https://orz.ai/api/v1/dailynews/?platform=36kr")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
- 		fetch("https://orz.ai/api/v1/dailynews/?platform=52pojie")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
- 		fetch("https://orz.ai/api/v1/dailynews/?platform=bilibili")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
-	 	fetch("https://orz.ai/api/v1/dailynews/?platform=douban")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
- 		fetch("https://orz.ai/api/v1/dailynews/?platform=hupu")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
-		fetch("https://orz.ai/api/v1/dailynews/?platform=tieba")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
-		//fetch("https://orz.ai/api/v1/dailynews/?platform=juejin")
-//.then((response) => response.json())
-//.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
-		fetch("https://orz.ai/api/v1/dailynews/?platform=douyin")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
-		fetch("https://orz.ai/api/v1/dailynews/?platform=v2ex")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
-		fetch("https://orz.ai/api/v1/dailynews/?platform=jinritoutiao")
-.then((response) => response.json())
-.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
+            this.weiboSource = [];
+            fetch("https://orz.ai/api/v1/dailynews/?platform=baidu")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=shaoshupai")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=weibo")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=zhihu")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=36kr")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=52pojie")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=bilibili")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=douban")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=hupu")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=tieba")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            //fetch("https://orz.ai/api/v1/dailynews/?platform=juejin")
+            //.then((response) => response.json())
+            //.then((data) => this.weiboSource =[...this.weiboSource,...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=douyin")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=v2ex")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+            fetch("https://orz.ai/api/v1/dailynews/?platform=jinritoutiao")
+                .then((response) => response.json())
+                .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
 
- 
- 
- 
- 
- 
+        }
+
+        function getWeiboredian() {
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            };
+            this.weiboSource = [];
+            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=1&version=1")
+                .then((response) => response.json())
+                .then((data) => {
+                    var list = JSON.parse(data.data.list);
+                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
+                });
+            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=2&version=1")
+                .then((response) => response.json())
+                .then((data) => {
+                    var list = JSON.parse(data.data.list);
+                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
+                });
+            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=3&version=1")
+                .then((response) => response.json())
+                .then((data) => {
+                    var list = JSON.parse(data.data.list);
+                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
+                });
+            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=4&version=1")
+                .then((response) => response.json())
+                .then((data) => {
+                    var list = JSON.parse(data.data.list);
+                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
+                });
+            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=5&version=1")
+                .then((response) => response.json())
+                .then((data) => {
+                    var list = JSON.parse(data.data.list);
+                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
+                });
+
+            // .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
+
+
         }
 
         window.onload = getWeiboredian;
