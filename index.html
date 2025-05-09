@@ -1907,40 +1907,15 @@ AI 重塑行业格局
                 headers: { 'Content-Type': 'application/json' }
             };
             this.weiboSource = [];
-            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=1&version=1")
-                .then((response) => response.json())
-                .then((data) => {
-                    var list = JSON.parse(data.data.list);
-                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
-                });
-            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=2&version=1")
-                .then((response) => response.json())
-                .then((data) => {
-                    var list = JSON.parse(data.data.list);
-                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
-                });
-            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=3&version=1")
-                .then((response) => response.json())
-                .then((data) => {
-                    var list = JSON.parse(data.data.list);
-                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
-                });
-            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=4&version=1")
-                .then((response) => response.json())
-                .then((data) => {
-                    var list = JSON.parse(data.data.list);
-                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
-                });
-            fetch("https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=5&version=1")
-                .then((response) => response.json())
-                .then((data) => {
-                    var list = JSON.parse(data.data.list);
-                    this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
-                });
 
-            // .then((data) => this.weiboSource = [...this.weiboSource, ...data.data.map(item => item.title)]);
-
-
+            for (let i = 0; i < 8; i++) {
+                fetch(`https://api.rebang.today/v1/items?tab=top&sub_tab=today&page=${i}&version=1`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        var list = JSON.parse(data.data.list);
+                        this.weiboSource = [...this.weiboSource, ...list.map(item => item.title)]
+                    });
+            }
         }
 
         window.onload = getWeiboredian;
